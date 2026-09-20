@@ -1,0 +1,12 @@
+services:
+  web:
+    ports: !reset []
+
+  mta:
+    ports: !override
+      - "0.0.0.0:5025:25"
+      - "0.0.0.0:587:587"
+
+  mda:
+    ports: !override
+      - "0.0.0.0:993:31993"
