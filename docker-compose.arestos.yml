@@ -3,3 +3,8 @@ include:
       - ./docker-compose.yml
       - ./docker-compose.production.yml
       - ./docker-compose.arestos.override.yml
+
+services:
+  web:
+    expose:
+      - "8080"
