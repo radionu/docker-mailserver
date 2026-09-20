@@ -1,17 +1,5 @@
 include:
-  - ./docker-compose.yml
-  - ./docker-compose.production.yml
-
-services:
-
-  web:
-    ports: !reset []
-
-  mta:
-    ports: !override
-      - "0.0.0.0:5025:25"
-      - "0.0.0.0:587:587"
-
-  mda:
-    ports: !override
-      - "0.0.0.0:993:31993"
+  - path:
+      - ./docker-compose.yml
+      - ./docker-compose.production.yml
+      - ./docker-compose.arestos.override.yml
