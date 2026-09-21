@@ -10,3 +10,37 @@ services:
   mda:
     ports: !override
       - "0.0.0.0:993:31993"
+
+  ldap:
+    image: osixia/openldap:1.5.0
+    hostname: ldap.int.arestos.com
+    restart: unless-stopped
+
+    environment:
+      LDAP_LOG_LEVEL: "256"
+
+      LDAP_ORGANISATION: "Arestos"
+      LDAP_DOMAIN: "int.arestos.com"
+      LDAP_BASE_DN: "dc=int,dc=arestos,dc=com"
+
+      LDAP_ADMIN_PASSWORD: "${LDAP_ADMIN_PASSWORD}"
+      LDAP_CONFIG_PASSWORD: "${LDAP_CONFIG_PASSWORD}"
+
+      LDAP_READONLY_USER: "false"
+
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+
+      LDAP_TLS: "true"
+      LDAP_TLS_ENFORCE: "false"
+
+    ports:
+      - "0.0.0.0:389:389"
+
+    volumes:
+      - ldap-data:/var/lib/ldap
+      - ldap-config:/etc/ldap/slapd.d
+
+volumes:
+  ldap-data:
+  ldap-config:
